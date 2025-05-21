@@ -8,8 +8,9 @@ import jakarta.persistence.Id;
 @Entity
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // MUST be here
 	private int id;
+	
 	private String name;
 	private String email;
 	private String number;

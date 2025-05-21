@@ -29,7 +29,7 @@ public class userController {
 	}
 	
 	@GetMapping
-    List<User> getAllUsers(){
+    public List<User> getAllUsers(){
     	return userService.getAllUsers();
     }
     
@@ -38,13 +38,13 @@ public class userController {
     	return userService.getUserById(id);
     }
     
-	@PutMapping
-    User updateUser(@PathVariable  int id,@RequestBody User user) {
-    	return userService.updateUser(id, user);
-    }
+	@PutMapping("/{id}")
+	public User updateUser(@PathVariable int id, @RequestBody User user) {
+	    return userService.updateUser(id, user);
+	}
 	
 	@DeleteMapping("/{id}")
-    void deleteUser(@PathVariable int id) {
+    public void deleteUser(@PathVariable int id) {
     	userService.deleteUser(id);
     }
     		
