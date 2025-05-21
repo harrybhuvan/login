@@ -1,4 +1,4 @@
-package com.example.login.entity.service;
+package com.example.login.service;
 
 public class UserServiceImplementation {
 
