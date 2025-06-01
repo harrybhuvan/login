@@ -11,7 +11,7 @@ import com.example.login.entity.User;
 public interface UserService {
 	 	public UserDTO createUser(UserDTO userDTO);
 	    List<UserDTO> getAllUsers();
-	    Optional<UserDTO> getUserById(int id);
+	    UserDTO getUserById(int id);
 	    UserDTO updateUser(int id, UserDTO userDTO);
 	    void deleteUser(int id);
 }
