@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 public class User {
@@ -12,7 +15,9 @@ public class User {
 	private int id;
 	
 	private String name;
+
 	private String email;
+	
 	private String number;
 	public int getId() {
 		return id;
