@@ -38,11 +38,12 @@ public class userController {
     }
     
 	@GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable int id){
-    	return userService.getUserById(id)
-    			.map(ResponseEntity::ok)
-    			.orElse(ResponseEntity.notFound().build());
-    }
+	public ResponseEntity<UserDTO>  getUserById(@PathVariable int id) {
+	    return userService.getUserById(id)
+	    		.map(ResponseEntity::ok)
+	    		.orElse(ResponseEntity.notFound()
+	    				.build());
+	}
     
 	@PutMapping("/{id}")
 	public ResponseEntity<UserDTO> updateUser(@PathVariable int id,@Valid @RequestBody UserDTO userDTO) {

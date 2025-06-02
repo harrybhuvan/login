@@ -35,10 +35,10 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public UserDTO getUserById(int id) {
+	public Optional<UserDTO> getUserById(int id) {
 		// TODO Auto-generated method stub
-		return userRepo.findById(id).map(UserMapper::toDTO)
-				.orElseThrow(()->new UserNotFoundException("User not found with id: "+id));
+		return Optional.ofNullable(userRepo.findById(id).map(UserMapper::toDTO)
+				.orElseThrow(()->new UserNotFoundException("User not found with id: "+id)));
 	}
 
 	@Override
