@@ -5,6 +5,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.login.DTO.UserDTO;
@@ -62,6 +65,28 @@ public class UserServiceImplementation implements UserService{
 		userRepo.deleteById(id);
 		
 	}
+
+	@Override
+	public Page<UserDTO> getAllUsersPaginated(int page, int size, String sortBy) {
+		PageRequest pageable = PageRequest.of(page, size,Sort.by(sortBy));
+		Page<User> pageUsers = userRepo.findAll(pageable);
+		return pageUsers.map(UserMapper::toDTO);
+	}
+	
+	@Override
+	public List<UserDTO> getUsersByFilters(String name, String email, String number) {
+	    List<User> filteredUsers = userRepo.findAll().stream()
+	        .filter(user -> (name == null || user.getName().equalsIgnoreCase(name)))
+	        .filter(user -> (email == null || user.getEmail().equalsIgnoreCase(email)))
+	        .filter(user -> (number == null || user.getNumber().equals(number)))
+	        .collect(Collectors.toList());
+
+	    return filteredUsers.stream()
+	            .map(UserMapper::toDTO)
+	            .collect(Collectors.toList());
+	}
+
 	
 	
 }
+
