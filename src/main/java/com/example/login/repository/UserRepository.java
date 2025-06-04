@@ -10,7 +10,6 @@ import jakarta.persistence.Id;
 
 public interface UserRepository extends JpaRepository<User, Integer>{
 
-	
 	List<User> findByNameContainingIgnoreCase(String name);
 	List<User> findByEmailContainingIgnoreCase(String email);
 	List<User> findByNumber(String number);

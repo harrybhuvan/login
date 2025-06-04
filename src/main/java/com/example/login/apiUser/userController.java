@@ -3,6 +3,8 @@ package com.example.login.apiUser;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/users")
 public class userController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(userController.class);
 	@Autowired
 	private UserService userService;
 	
@@ -39,6 +43,7 @@ public class userController {
 	
 	 @PostMapping
 	    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) {
+		 	logger.info("Creating the new user");
 	        return ResponseEntity.ok(userService.createUser(userDTO));
 	 }
 	
@@ -54,6 +59,7 @@ public class userController {
     
 	@GetMapping("/{id}")
 	public ResponseEntity<UserDTO>  getUserById(@PathVariable int id) {
+		logger.info("Fetching the user with ID : {}", id);
 	    return userService.getUserById(id)
 	    		.map(ResponseEntity::ok)
 	    		.orElse(ResponseEntity.notFound()
@@ -67,6 +73,7 @@ public class userController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+		logger.info("Deleting the user ID: {} ",id);
 	    userService.deleteUser(id);
 	    return ResponseEntity.noContent().build();
 	}
